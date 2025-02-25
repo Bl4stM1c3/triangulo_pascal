@@ -1,0 +1,27 @@
+#Posible solucion al ejercicio 41 de https://retosdeprogramacion.com/ejercicios/
+#Crea una función que sea capaz de dibujar el "Triángulo de Pascal"
+# * indicándole únicamente el tamaño del lado.
+# *
+# * - Aquí puedes ver rápidamente cómo se calcula el triángulo:
+# *   https://commons.wikimedia.org/wiki/File:PascalTriangleAnimated2.gif
+
+def triangulo_pascal(lado):
+  #Definimos las variables
+  triangulo = []
+
+  for i in range(lado):
+    triangulo.append([]) #Añadimos filas vacias
+    for d in range(i+1):
+      if d==0 or d==i: #Los primeros y ultimos miembros de cada fila seran = 1
+        triangulo.append(1)
+      else:
+        resultado = triangulo[i-1][d]+triangulo[i-1][d-1]
+        triangulo.append(resultado)
+  
+  #calculamos el ancho máximo de la base para centrar las filas al mostrarlas por pantalla
+  max_ancho = len(" ".join(map(str, triangulo[-1])))
+
+  for fila in triangulo:
+    fila_str = " ".join(map(str, fila)) #Convierte las listas de numeros en cadenas de texto con cada miembro separado por un espacio
+    print(fila_str.center(max_ancho))
+  
